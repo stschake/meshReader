@@ -1,0 +1,70 @@
+﻿Build started 06.01.2011 17:48:40.
+     1>Project "S:\meshReader\RecastLayer\RecastLayer.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\RecastLayer.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release\RecastLayer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         S:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /analyze- /errorReport:prompt DetourLayer.cpp Detour\DetourAlloc.cpp Detour\DetourCommon.cpp Detour\DetourNavMesh.cpp Detour\DetourNavMeshBuilder.cpp Detour\DetourNavMeshQuery.cpp Detour\DetourNode.cpp Detour\DetourObstacleAvoidance.cpp RecastLayer.cpp Recast\Recast.cpp Recast\RecastAlloc.cpp Recast\RecastArea.cpp Recast\RecastContour.cpp Recast\RecastFilter.cpp Recast\RecastMesh.cpp Recast\RecastMeshDetail.cpp Recast\RecastRasterization.cpp Recast\RecastRegion.cpp /clr:nostdlib 
+         DetourLayer.cpp
+         DetourAlloc.cpp
+         DetourCommon.cpp
+         DetourNavMesh.cpp
+         DetourNavMeshBuilder.cpp
+         DetourNavMeshQuery.cpp
+         DetourNode.cpp
+         DetourObstacleAvoidance.cpp
+         RecastLayer.cpp
+         Recast.cpp
+     1>Recast\Recast.cpp(44): warning C4996: 'vsnprintf': This function or variable may be unsafe. Consider using vsnprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 S:\Microsoft Visual Studio 10.0\VC\include\stdio.h(354) : see declaration of 'vsnprintf'
+         RecastAlloc.cpp
+         RecastArea.cpp
+         RecastContour.cpp
+         RecastFilter.cpp
+         RecastMesh.cpp
+         RecastMeshDetail.cpp
+         RecastRasterization.cpp
+         RecastRegion.cpp
+         Generating Code...
+     1>s:\meshreader\recastlayer\recast\recast.cpp(37): warning C4793: 'rcContext::log' : function compiled as native :
+         	varargs not supported under /clr
+     1>s:\meshreader\recastlayer\recast\recast.cpp(43): warning C4793: 'rcContext::log' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+     1>s:\meshreader\recastlayer\recast\recast.cpp(50): warning C4793: 'rcContext::log' : function compiled as native :
+         	Found an intrinsic not supported in managed code
+         S:\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /analyze- /errorReport:prompt "C:\Users\caytchen\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       Link:
+         S:\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"S:\meshReader\Release\RecastLayer.dll" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\RecastLayer.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"S:\meshReader\Release\RecastLayer.pdb" /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Release\DetourLayer.obj
+         Release\DetourAlloc.obj
+         Release\DetourCommon.obj
+         Release\DetourNavMesh.obj
+         Release\DetourNavMeshBuilder.obj
+         Release\DetourNavMeshQuery.obj
+         Release\DetourNode.obj
+         Release\DetourObstacleAvoidance.obj
+         Release\RecastLayer.obj
+         Release\Recast.obj
+         Release\RecastAlloc.obj
+         Release\RecastArea.obj
+         Release\RecastContour.obj
+         Release\RecastFilter.obj
+         Release\RecastMesh.obj
+         Release\RecastMeshDetail.obj
+         Release\RecastRasterization.obj
+         Release\RecastRegion.obj
+         "Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         RecastLayer.vcxproj -> S:\meshReader\Release\RecastLayer.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"S:\meshReader\Release\RecastLayer.dll;#2" /manifest Release\RecastLayer.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\RecastLayer.unsuccessfulbuild".
+         Touching "Release\RecastLayer.lastbuildstate".
+     1>Done Building Project "S:\meshReader\RecastLayer\RecastLayer.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:08.64

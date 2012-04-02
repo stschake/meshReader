@@ -1,0 +1,123 @@
+From 1f5bf032db3a4cfec25b6fcda2567864d2bd3988 Mon Sep 17 00:00:00 2001
+From: Stefan Schake <caytchen@gmail.com>
+Date: Mon, 6 Dec 2010 12:42:21 +0100
+Subject: [PATCH] Use typedef for node pool ref type
+
+Signed-off-by: Stefan Schake <caytchen@gmail.com>
+---
+ DetourNode.cpp |   16 ++++++++--------
+ DetourNode.h   |   17 ++++++++++-------
+ 2 files changed, 18 insertions(+), 15 deletions(-)
+
+diff --git a/DetourNode.cpp b/DetourNode.cpp
+index 7b4d94a..d0fe5d9 100644
+--- a/DetourNode.cpp
++++ b/DetourNode.cpp
+@@ -46,15 +46,15 @@ dtNodePool::dtNodePool(int maxNodes, int hashSize) :
+ 	dtAssert(m_maxNodes > 0);
+ 
+ 	m_nodes = (dtNode*)dtAlloc(sizeof(dtNode)*m_maxNodes, DT_ALLOC_PERM);
+-	m_next = (unsigned short*)dtAlloc(sizeof(unsigned short)*m_maxNodes, DT_ALLOC_PERM);
+-	m_first = (unsigned short*)dtAlloc(sizeof(unsigned short)*hashSize, DT_ALLOC_PERM);
++	m_next = (dtNodeRef*)dtAlloc(sizeof(dtNodeRef)*m_maxNodes, DT_ALLOC_PERM);
++	m_first = (dtNodeRef*)dtAlloc(sizeof(dtNodeRef)*hashSize, DT_ALLOC_PERM);
+ 
+ 	dtAssert(m_nodes);
+ 	dtAssert(m_next);
+ 	dtAssert(m_first);
+ 
+-	memset(m_first, 0xff, sizeof(unsigned short)*m_hashSize);
+-	memset(m_next, 0xff, sizeof(unsigned short)*m_maxNodes);
++	memset(m_first, 0xff, sizeof(dtNodeRef)*m_hashSize);
++	memset(m_next, 0xff, sizeof(dtNodeRef)*m_maxNodes);
+ }
+ 
+ dtNodePool::~dtNodePool()
+@@ -66,14 +66,14 @@ dtNodePool::~dtNodePool()
+ 
+ void dtNodePool::clear()
+ {
+-	memset(m_first, 0xff, sizeof(unsigned short)*m_hashSize);
++	memset(m_first, 0xff, sizeof(dtNodeRef)*m_hashSize);
+ 	m_nodeCount = 0;
+ }
+ 
+ dtNode* dtNodePool::findNode(dtPolyRef id)
+ {
+ 	unsigned int bucket = dtHashRef(id) & (m_hashSize-1);
+-	unsigned short i = m_first[bucket];
++	dtNodeRef i = m_first[bucket];
+ 	while (i != DT_NULL_IDX)
+ 	{
+ 		if (m_nodes[i].id == id)
+@@ -86,7 +86,7 @@ dtNode* dtNodePool::findNode(dtPolyRef id)
+ dtNode* dtNodePool::getNode(dtPolyRef id)
+ {
+ 	unsigned int bucket = dtHashRef(id) & (m_hashSize-1);
+-	unsigned short i = m_first[bucket];
++	dtNodeRef i = m_first[bucket];
+ 	dtNode* node = 0;
+ 	while (i != DT_NULL_IDX)
+ 	{
+@@ -98,7 +98,7 @@ dtNode* dtNodePool::getNode(dtPolyRef id)
+ 	if (m_nodeCount >= m_maxNodes)
+ 		return 0;
+ 	
+-	i = (unsigned short)m_nodeCount;
++	i = (dtNodeRef)m_nodeCount;
+ 	m_nodeCount++;
+ 	
+ 	// Init node
+diff --git a/DetourNode.h b/DetourNode.h
+index e893f78..801196d 100644
+--- a/DetourNode.h
++++ b/DetourNode.h
+@@ -21,13 +21,16 @@
+ 
+ #include "DetourNavMesh.h"
+ 
++// Change this to allow for a higher maxNodes. Also change DT_NULL_IDX.
++typedef unsigned int dtNodeRef;
++
+ enum dtNodeFlags
+ {
+ 	DT_NODE_OPEN = 0x01,
+ 	DT_NODE_CLOSED = 0x02,
+ };
+ 
+-static const unsigned short DT_NULL_IDX = 0xffff;
++static const dtNodeRef DT_NULL_IDX = 0xffffffff;
+ 
+ struct dtNode
+ {
+@@ -71,21 +74,21 @@ public:
+ 	{
+ 		return sizeof(*this) +
+ 		sizeof(dtNode)*m_maxNodes +
+-		sizeof(unsigned short)*m_maxNodes +
+-		sizeof(unsigned short)*m_hashSize;
++		sizeof(dtNodeRef)*m_maxNodes +
++		sizeof(dtNodeRef)*m_hashSize;
+ 	}
+ 	
+ 	inline int getMaxNodes() const { return m_maxNodes; }
+ 	
+ 	inline int getHashSize() const { return m_hashSize; }
+-	inline unsigned short getFirst(int bucket) const { return m_first[bucket]; }
+-	inline unsigned short getNext(int i) const { return m_next[i]; }
++	inline dtNodeRef getFirst(int bucket) const { return m_first[bucket]; }
++	inline dtNodeRef getNext(int i) const { return m_next[i]; }
+ 	
+ private:
+ 	
+ 	dtNode* m_nodes;
+-	unsigned short* m_first;
+-	unsigned short* m_next;
++	dtNodeRef* m_first;
++	dtNodeRef* m_next;
+ 	const int m_maxNodes;
+ 	const int m_hashSize;
+ 	int m_nodeCount;
+-- 
+1.7.3.1.msysgit.0
+
